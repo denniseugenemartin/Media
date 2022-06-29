@@ -1,0 +1,19 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+
+        	   <h2 style = "color:white">Search Results</h2>
+                <hr>
+                    <div id = "tacos">
+                        <ul>
+                            {% for item in data.results %}
+                                <li><a href="{% url 'detail' item.id %}" >{{item.title}} - {{item.description}}</a></li>
+                            {% empty %}
+                                <li>No results found.</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+
+<h1 style = "margin-bottom: 2em">Log In</h1>
+<form method="post">
+  {% csrf_token %}
+  <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter password">
+  </div>
+  <button type="submit">Log In</button>
+</form>
+<p>Not a registered user?
+    <br>
+    <br>
+    <a href = "{% url 'register_request' %}">Register!</a>
+</p>
+</header>
+
+{% endblock %}

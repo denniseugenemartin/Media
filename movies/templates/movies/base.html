@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<!--
+	Helios by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		{% load static %}
+		<title>Movie Database</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css" /></noscript>
+
+	</head>
+
+
+	<!-- Nav -->
+						<nav id="nav">
+							<ul>
+								<li><a href="{% url 'home' %}">Home</a></li>
+								<li>
+									<a href="{% url 'explore' %}">Explore</a>
+									<ul>
+										<li><a href="{% url 'top_movies' %}">Top 250 Movies</a></li>
+										<li><a href="{% url 'top_tv' %}">Top 250 TV Shows</a></li>
+										<li><a href="{% url 'pop_movies' %}">Popular Movies</a></li>
+										<li><a href="{% url 'pop_tv' %}">Popular TV Shows</a></li>
+									</ul>
+								</li>
+								<li>
+  									{% if user.is_authenticated %}
+  										Welcome {{ user.username }}!
+    									<ul>
+											<li><a href= "{% url 'watchlist' %}">Your Watchlist</a></li>
+											<li><a href= "{% url 'logout_request' %}">Log Out</a></li>
+										</ul>
+									{% else %}
+  										<li><a href= "{% url 'login_request' %}" >Log In</a></li>
+									{% endif %}
+								</li>
+								<li><a href="{% url 'about' %}">About</a></li>
+							</ul>
+						</nav>
+
+
+	<body class="homepage is-preload">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+
+
+	{%block content%}
+	{%endblock%}
+							</header>
+						</div>
+				</div>
+<!-- Footer -->
+				<div id="footer">
+					<div class="container">
+						<hr />
+						<div class="row">
+							<div class="col-12">
+
+								<!-- Contact -->
+									<section class="contact">
+										<header>
+											<h3>Nisl turpis nascetur interdum?</h3>
+										</header>
+										<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+										<ul class="icons">
+											<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+											<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+											<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+											<li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
+											<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+											<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+										</ul>
+									</section>
+
+								<!-- Copyright -->
+									<div class="copyright">
+										<ul class="menu">
+											<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+										</ul>
+									</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.dropotron.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+
+	</body>
+</html>
