@@ -1,37 +1,12 @@
 {% extends 'movies/base.html' %}
 {% block content %}
- <h1>Details</h1>
- <p>
 
-<h2>Subscription Services</h2>
-<ul>
-{% for item in data %}
-     {% if item.type == 'sub' %}
-    <li><a href = {{item.web_url}}>{{item.name}} ({{item.format}})</a></li>
-    {%endif%}
-    {% empty %}
-    <li>No results found.</li>
- {% endfor %}
-</ul>
- <h2>Rentals</h2>
- <ul>
-{% for item in data %}
-    {% if item.type == 'Rent' %}
-    <li><a href = {{item.web_url}}>{{item.name}} ({{item.format}})</a></li>
-    {%endif%}
-    {% empty %}
-    <li>No results found.</li>
- {% endfor %}
-</ul>
- <h2>Purchase</h2>
- <ul>
-{% for item in data %}
-    {% if item.type == 'buy' %}
-    <li><a href = {{item.web_url}}>{{item.name}} ({{item.format}})</a></li>
-     {%endif%}
-      {% empty %}
-    <li>No results found.</li>
- {% endfor %}
-</ul>
-</p>
+<h2 style = "color:white">Details</h2>
+                    <hr>
+                    <div id = "tacos">
+                        <ul>
+                            <li>{{data.id}}</li>
+                        </ul>
+                       		<a class="click-me" href=" {% url 'save_movie' data.id %}">Save to favorites</a>
+                    </div>
 {% endblock %}

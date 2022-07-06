@@ -1,4 +1,12 @@
 {% extends 'movies/base.html' %}
 {% block content %}
-
-{% endblock %}
+ <hr>
+                    <div id = "tacos">
+                        <ul>
+                            <li><a href = "{% url 'top_movies' %}">Top 250 Movies</a></li>
+                            <li><a href = "{% url 'top_tv' %}">Top 250 TV Shows</a></li>
+                            <li><a href = "{% url 'pop_movies' %}">Most Popular Movies</a></li>
+                            <li><a href = "{% url 'pop_tv' %}">Most Popular TV Shows</a></li>
+                        </ul>
+                    </div>
+    {% endblock %}

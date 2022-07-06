@@ -32,6 +32,7 @@ footer, header, hgroup, menu, nav, section {
 
 body {
 	line-height: 1;
+	margin-bottom: 50px;
 }
 
 ol, ul {
@@ -230,6 +231,7 @@ input, select, textarea {
 /* Container */
 
 	.container {
+	    color: black;
 		margin: 0 auto;
 		max-width: 100%;
 		width: 1400px;
@@ -1821,11 +1823,11 @@ input, select, textarea {
 
     #tacos
     {
-    background-image:url("../../images/chalkboard.jpg");
+    background-image:url("../../images/screen.jpg");
     background-size: auto;
     border: double;
     border-width:thick;
-    border-color: ghostwhite;
+    border-color: black;
     padding: 2em;
     }
 	ul {
@@ -2068,7 +2070,7 @@ input, select, textarea {
 
 		position: relative;
 		display: inline-block;
-		background: #3087c9;
+		background: #4E5C6F;
 		color: #fff;
 		text-align: center;
 		border-radius: 0.5em;
@@ -2190,7 +2192,7 @@ input, select, textarea {
 
 	#header {
 		position: relative;
-		background-color: blue;
+		background-color: #454C56;
 		opacity: 0.75;
 		background-size: cover;
 		background-position: center center;
@@ -2397,6 +2399,7 @@ input, select, textarea {
 
 			.dropotron li a, .dropotron li span {
 				display: block;
+				color: black;
 				border: 0;
 				padding: 0.5em 0 0.5em 0;
 				-moz-transition: color 0.35s ease-in-out;
@@ -2473,10 +2476,15 @@ input, select, textarea {
 /* Footer */
 
 	#footer {
-		position: relative;
+		position: fixed;
+		width: 100%;
+		bottom: 0px;
+		left: 0px;
+        right: 0px;
+        margin-bottom: 0px;
 		overflow: hidden;
 		padding: 2em 0 2em 0;
-		background: #2b252c;
+		background: #313A46;
 		color: #fff;
 	}
 
@@ -2871,6 +2879,16 @@ input, select, textarea {
 				line-height: 3em;
 				width: 100%;
 			}
+			.clickMe {
+    -moz-appearance: button;
+    -ms-appearance: button;
+    -o-appearance: button;
+    -webkit-appearance: button;
+    appearance: button;
+    text-decoration: none;
+    color: #000;
+    padding: 0.2em 0.4em;
+}
 
 		/* Nav */
 

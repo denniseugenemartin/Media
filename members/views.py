@@ -1,18 +1,18 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from .models import Profile
 from .forms import CustomUserCreationForm
-from django.http import HttpResponseRedirect
-
-
 
 
 def about(request):
     return render(request, 'members/about.html')
 
 def watchlist(request):
-    return render(request, 'members/watchlist.html')
+    if request.user.is_active:
+        user = request.user
+        data = user.profile.watchlist
+    return render(request, 'members/watchlist.html', {'data':data})
 
 def login_user(request):
     if request.method == "POST":
@@ -43,7 +43,7 @@ def register_user(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Registration Successful!")
-            return render(request, 'home_view')
+            return render(request, 'movies/index.html')
     else:
         form = CustomUserCreationForm()
     context = {

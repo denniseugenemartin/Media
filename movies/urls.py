@@ -13,10 +13,12 @@ urlpatterns = [
     path('members/', include('members.urls')),
     path("accounts/", include("django.contrib.auth.urls")),
     path('explore/', views.explore, name = 'explore'),
-    path('top_movies/', views.top_movies, name = 'top_movies'),
+    path('top_movies/', views.listing, name = 'top_movies'),
     path('top_tv/', views.top_tv, name='top_tv'),
     path('pop_tv/', views.pop_tv, name='pop_tv'),
-    path('pop_movies/', views.pop_tv, name='pop_movies')
+    path('movies', views.pop_movies, name='pop_movies'),
+    path('sources', views.sources, name='sources'),
+    path(r'save_movie/<str:number>/', views.save_movie, name='save_movie')
 
 
     ]

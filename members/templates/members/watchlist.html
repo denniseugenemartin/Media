@@ -1,4 +1,14 @@
 {% extends 'movies/base.html' %}
 {% block content %}
+<h2 style = "color:white">Watchlist</h2>
+                <hr>
+                    <div id = "tacos">
+                        <ul>
+                            {% for item in data.data %}
 
+                                <li><a href="{% url 'detail' item %}" >{{item}}</li>
+
+                            {%endfor%}
+                        </ul>
+                    </div>
 {% endblock %}
