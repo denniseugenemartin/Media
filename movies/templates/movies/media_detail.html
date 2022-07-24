@@ -1,0 +1,62 @@
+{% extends 'movies/base.html' %}
+{% block content %}
+
+	<article id="main" class="container special">
+		<div>
+			<div class="row">
+				<article class="col-4 col-12-mobile special">
+					<a class="image featured"><img src= "{{data.image}}" alt="" /></a>
+					<h3> IMDB Rating: {{data.imdb_rating}} </h3>
+
+					<h3>
+						Metacritic Score: {{data.metacritic_score}}%
+
+					</h3>
+					<a class="button" style="width:70%" href=" {% url 'save_movie' data.id %}">Save to Watchlist</a>
+
+				</article>
+			<article class="col-8 col-12-mobile special">
+				<p>
+				<h2>{{data.title}} ({{data.year}})</h2>
+					<div style = "display: flex; flex-direction:column;">
+						<h3 style = "color:black">Streaming Platforms (Subscription):</h3>
+						{% for item in data.stream_sources %}
+							{% if item.type == 'sub' %}
+								<a href = " {{item.web_url}} ">{{item.name}} ({{item.format}})</a>
+							{% endif %}
+						{% endfor %}
+						<br><br>
+
+						<h3 style = "color:black">Streaming Platforms (Free):</h3>
+							{% for item in data.stream_sources %}
+								{% if item.type == 'free' %}
+									<a href = " {{item.web_url}} ">{{item.name}} ({{item.format}})</a>
+								{% endif %}
+							{% endfor %}
+							<br><br>
+
+						<h3 style = "color:black">Streaming Platforms (Rent):</h3>
+							{% for item in data.stream_sources %}
+								{% if item.type == 'rent' %}
+									<a href = " {{item.web_url}} ">{{item.name}} ({{item.format}}) - {{item.price}}</a>
+								{% endif %}
+							{% endfor %}
+							<br><br>
+
+						<h3 style = "color:black">Streaming Platforms (Buy):</h3>
+							{% for item in data.stream_sources %}
+								{% if item.type == 'buy' %}
+									<a href = " {{item.web_url}} ">{{item.name}} ({{item.format}}) - {{item.price}}</a>
+								{% endif %}
+							{% endfor %}
+							<br><br>
+				</div>
+			</div>
+
+			</p>
+
+		</div>
+	</article>
+    <div class="clear">
+	</div>
+{%endblock%}

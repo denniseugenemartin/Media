@@ -3,7 +3,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .models import Profile
 from .forms import CustomUserCreationForm
-
+import pdb
+from django.forms.models import model_to_dict
 
 def about(request):
     return render(request, 'members/about.html')
@@ -12,7 +13,9 @@ def watchlist(request):
     if request.user.is_active:
         user = request.user
         data = user.profile.watchlist
-    return render(request, 'members/watchlist.html', {'data':data})
+        #pdb.set_trace()
+
+    return render(request, 'members/watchlist.html', data)
 
 def login_user(request):
     if request.method == "POST":
@@ -21,11 +24,11 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            # Redirect to a success page.
+            messages.success(request, 'Logged in successfully.')
             return render(request, 'movies/index.html')
         else:
             # Return an 'invalid login' error message.
-            messages.success(request, "Username/Password invalid")
+            messages.error(request, 'Username/Password invalid')
             return render(request, 'members/login.html')
     else:
         return render(request, 'members/login.html')
@@ -33,7 +36,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    # Redirect to a success page.
+    messages.success(request, 'Logged out successfully.')
     return render(request, 'movies/index.html')
 
 

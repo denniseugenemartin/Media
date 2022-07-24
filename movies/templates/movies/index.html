@@ -1,16 +1,22 @@
 {% extends 'movies/base.html' %}
 {% block content %}
+<div class="wrapper style1">
 
+<div style = "text-align:center">
+    <h2>Media Information Hotline</h2>
 
-								<h1 style = "margin-bottom: 1em">The Movie Database</h1>
-								<form action= "{%url 'search' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="text"  name="search_input" placeholder="Movie Name" style = "margin-bottom: 2em">
-                                    <input type="submit" value="Search">
-                                </form>
+    </div>
+	<form action= "{%url 'search' %}" method="post">
+        {% csrf_token %}
+        <div style="text-align:center;">
+        <input type="text"  name="search_input" placeholder="Media Name" style = "width: 40%">
+          <div style="justify-content:center;">
+        <input type="submit" value="Search">
+              </div>
+        </div>
+    </form>
 
-							</header>
-						</div>
-
+</div>
+<div class="clear"></div>
 
 {% endblock %}

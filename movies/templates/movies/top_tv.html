@@ -1,14 +1,36 @@
 {% extends 'movies/base.html' %}
 {% block content %}
-  <h2>Top 250 TV Shows</h2>
-                <hr>
-                    <div id = "tacos">
-                        <ol>
-                            {% for item in data.items %}
-                                <li><a href="{% url 'detail' item.id %}" >{{item.title}} - {{item.description}}</a></li>
-                            {% empty %}
-                                <li>No results found.</li>
-                            {% endfor %}
-                        </ol>
-                    </div>
+<div class="wrapper style2">
+    <article id="main" class="container special">
+        <header>
+            <h2>Top 250 TV Shows</h2>
+            <hr>
+        </header>
+
+        {% for item in page_obj %}
+            {{item.rank}}. <a href = "{% url 'detail' item.id %}">{{item.title }}</a><br>
+        {% endfor %}
+    <br>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+    </div>
+    </article>
+</div>
+
+    <div class="clear"></div>
 {% endblock %}

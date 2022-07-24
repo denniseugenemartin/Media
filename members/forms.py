@@ -2,15 +2,14 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from django.forms.fields import EmailField
-from django.forms.forms import Form
-
 
 class CustomUserCreationForm(UserCreationForm):
-    username = forms.CharField(label='Username', min_length=5, max_length=20)
-    email = forms.EmailField(label='Email')
+    username = forms.CharField(label='Username', min_length=5, max_length=20, widget = forms.TextInput)
+    email = forms.EmailField(label='Email', widget= forms.EmailInput)
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm password', widget=forms.PasswordInput)
+
+
 
     def username_clean(self):
         username = self.cleaned_data['username'].lower()

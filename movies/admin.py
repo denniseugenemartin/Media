@@ -1,4 +1,4 @@
-from .models import Movie
+from .models import Media
 from django.contrib import admin
 
-admin.site.register(Movie)
+admin.site.register(Media)
