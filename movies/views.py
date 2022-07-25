@@ -1,5 +1,3 @@
-from time import strftime
-
 from django.shortcuts import render
 import requests
 from .models import Media
@@ -16,47 +14,73 @@ from datetime import date, time, datetime, timedelta
 # with a success message. If user is not logged in they will be sent to login page with an error message instead.
 
 def save_media(request, number):
+
+    # find or create the object using the id number provided to function
     instance = lookup_obj(number)
+
+    # convert media object to a dict object in order to serialize
     media = model_to_dict(instance)
+
+    # if the user is logged in, get their watchlist and store it in a variable
     if request.user.is_active:
         user = request.user
         response = user.profile.watchlist.get('data')
 
+      # check to see if user already has a non empty watchlist
         if user.profile.watchlist:
+
+            # if this item has the same id (pk) as an item already in the user's watchlist, return an error message and
+            # don't update anything.
+            for item in response:
+                if item['id'] == number:
+                    messages.error(request, "Item already exists in your watchlist.")
+                    return render(request, "movies/media_detail.html", {'data':instance})
             response.append(media)
             user.profile.watchlist = {'data': response}
+
+        # if the user does not have a watchlist, add this object to a new list and update the watchlist with this info.
         else:
             datalist = [media]
             user.profile.watchlist.update({'data': datalist})
+
+        # if the logic makes it to the save step then the user was logged in and the object did not already exist in
+        # their watchlist. Save, reload page with success message.
         user.save()
+        messages.success(request, "Watchlist updated.")
+        return render(request, "movies/media_detail.html", {'data':instance})
+
+    # if there is no logged in user, present an error message and send to login page
     else:
         messages.error(request, "You must login to save to a watchlist.")
         return render(request, 'members/login.html')
-    messages.success(request, "Watchlist updated.")
-    return render(request, 'movies/index.html')
-
 
 # try and find the movie object in the database using the id number as key. If object already exists simply return
 # the object without making any API calls. If object does not exist, create and fill fields
 # with data from API calls. Will also update data if last update was greater than 7 days ago.
 
 def lookup_obj(number):
+
+    # try and get an object using id as key, if it does not exist call create_media_obj function instead.
     try:
         media = Media.objects.get(id = number)
     except Media.DoesNotExist:
         media = create_media_obj(number)
 
+    # datelimit variable will contain a date from 7 days previous to today's date. Parse the date_updated attribute
+    # of the media oject and compare. if time_updated occured before the datelimit call create_media_obj to refresh
+    # all data associated with object, otherwise return object.
     datelimit = datetime.today() - timedelta(days = 7)
-    time_between = datetime.strptime(media.date_updated, "%Y-%m-%d")
-
-    if time_between < datelimit:
+    time_updated = datetime.strptime(media.date_updated, "%Y-%m-%d")
+    if time_updated < datelimit:
         create_media_obj(number)
     return media
 
 
 # Creates a Django model for the media object in the database.
 def create_media_obj(number):
-    # Make first API call. This is where basic movie info will come from
+
+    # Make first API call. This is where basic movie info will come from. Parse data using .json() and update data
+    # if object already exists in database. Otherwise create the object with appropriate fields from API.
     api_key = "k_5a9rr4on"
     url = f"https://imdb-api.com/en/API/Title/{api_key}/{number}"
     response = requests.get(url)
@@ -71,7 +95,9 @@ def create_media_obj(number):
         date_updated=date.today().strftime("%Y-%m-%d")
     )
 
-    # make second API call. This is where streaming information will come from.
+    # make second API call. This is where streaming information will come from. Again parse data from API call with
+    # .json(). Create empty list and then iterate through list of dict objects adding each dictionary to the stream_sources
+    # field of media object and save.
     api_key = "bIr2F5F1XABxaT9SIJ2fBejicWI2yQGKVcepiYXY"
     url = f"https://api.watchmode.com/v1/title/{number}/sources/?apiKey={api_key}"
     response = requests.get(url)

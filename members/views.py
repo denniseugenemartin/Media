@@ -4,7 +4,10 @@ from django.contrib import messages
 from .models import Profile
 from .forms import CustomUserCreationForm
 import pdb
-from django.forms.models import model_to_dict
+
+
+
+
 
 def about(request):
     return render(request, 'members/about.html')
@@ -13,10 +16,11 @@ def watchlist(request):
     if request.user.is_active:
         user = request.user
         data = user.profile.watchlist
-        #pdb.set_trace()
 
     return render(request, 'members/watchlist.html', data)
 
+# takes post result and authenticates it. If successful login and return to index with success message. If unsuccessful
+# reload login page with error message.
 def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -33,13 +37,13 @@ def login_user(request):
     else:
         return render(request, 'members/login.html')
 
-
+# Logout user and return to index with success message.
 def logout_user(request):
     logout(request)
     messages.success(request, 'Logged out successfully.')
     return render(request, 'movies/index.html')
 
-
+# If view gets POST data then validate it and present success message. Otherwise, display form on registration page.
 def register_user(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
