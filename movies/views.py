@@ -67,7 +67,7 @@ def lookup_obj(number):
         media = create_media_obj(number)
 
     # datelimit variable will contain a date from 7 days previous to today's date. Parse the date_updated attribute
-    # of the media oject and compare. if time_updated occured before the datelimit call create_media_obj to refresh
+    # of the media object and compare. if time_updated occurred before the datelimit call create_media_obj to refresh
     # all data associated with object, otherwise return object.
     datelimit = datetime.today() - timedelta(days = 7)
     time_updated = datetime.strptime(media.date_updated, "%Y-%m-%d")
@@ -80,7 +80,7 @@ def lookup_obj(number):
 def create_media_obj(number):
 
     # Make first API call. This is where basic movie info will come from. Parse data using .json() and update data
-    # if object already exists in database. Otherwise create the object with appropriate fields from API.
+    # if object already exists in database. Otherwise, create the object with appropriate fields from API.
     api_key = "k_5a9rr4on"
     url = f"https://imdb-api.com/en/API/Title/{api_key}/{number}"
     response = requests.get(url)

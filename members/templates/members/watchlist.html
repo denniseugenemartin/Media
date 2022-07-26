@@ -2,20 +2,34 @@
 {% block content %}
     <div class="wrapper style2">
         <article id="main" class="container special">
-            <h2 style = "color:white">Watchlist</h2>
-            <hr>
-                <table>
-                    <tr>
-                      <th>ID</th>
-                      <th>TITLE</th>
-                    </tr>
-                    {% for item in data %}
-                      <tr>
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.title }}</td>
-                      </tr>
-                    {% endfor %}
-                  </table>
+            <h2>Watchlist</h2>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Year</th>
+      <th scope="col">IMDB Rating</th>
+      <th scope="col">Metacritic Score</th>
+      <th scope="col">Streaming Platforms (Sub/Free)</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in data %}
+        <tr>
+            <td><a href="{% url 'detail' item.id %}" >{{item.title}}</a></td>
+            <td>{{item.year}}</td>
+            <td>{{item.imdb_rating}}</td>
+            <td>{{item.metacritic_score}}%</td>
+            <td>{% for source in item.stream_sources %}
+                    {% if source.type == 'sub' or source.type == 'free' %}
+                        <a href = " {{item.web_url}} ">{{source.name}}</a><br>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
     </article>
                     </div>

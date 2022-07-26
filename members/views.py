@@ -6,9 +6,6 @@ from .forms import CustomUserCreationForm
 import pdb
 
 
-
-
-
 def about(request):
     return render(request, 'members/about.html')
 
@@ -16,7 +13,6 @@ def watchlist(request):
     if request.user.is_active:
         user = request.user
         data = user.profile.watchlist
-
     return render(request, 'members/watchlist.html', data)
 
 # takes post result and authenticates it. If successful login and return to index with success message. If unsuccessful
