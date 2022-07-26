@@ -22,7 +22,7 @@
             <td>{{item.metacritic_score}}%</td>
             <td>{% for source in item.stream_sources %}
                     {% if source.type == 'sub' or source.type == 'free' %}
-                        <a href = " {{item.web_url}} ">{{source.name}}</a><br>
+                        <a href = " {{source.web_url}} ">{{source.name}}</a><br>
                     {% endif %}
                 {% endfor %}
             </td>
