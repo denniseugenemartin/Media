@@ -26,6 +26,7 @@
                     {% endif %}
                 {% endfor %}
             </td>
+            <td><a class="button" href=" {% url 'remove_media' item.id %}">Delete</a></td>
         </tr>
     {% endfor %}
   </tbody>

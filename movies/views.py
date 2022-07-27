@@ -4,55 +4,9 @@ from .models import Media
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import pdb
-from django.forms.models import model_to_dict
 from datetime import date, time, datetime, timedelta
 
 
-# save movie to user's watchlist. it will create a movie object using the create_movie_obj function. Then it will check
-# if the user is logged in. If they are, then it will get their watchlist data and append the id number of the movie to
-# that list or create a new watchlist with this number as the first entry. User will then be sent back to index page
-# with a success message. If user is not logged in they will be sent to login page with an error message instead.
-
-def save_media(request, number):
-
-    # find or create the object using the id number provided to function
-    instance = lookup_obj(number)
-
-    # convert media object to a dict object in order to serialize
-    media = model_to_dict(instance)
-
-    # if the user is logged in, get their watchlist and store it in a variable
-    if request.user.is_active:
-        user = request.user
-        response = user.profile.watchlist.get('data')
-
-      # check to see if user already has a non empty watchlist
-        if user.profile.watchlist:
-
-            # if this item has the same id (pk) as an item already in the user's watchlist, return an error message and
-            # don't update anything.
-            for item in response:
-                if item['id'] == number:
-                    messages.error(request, "Item already exists in your watchlist.")
-                    return render(request, "movies/media_detail.html", {'data':instance})
-            response.append(media)
-            user.profile.watchlist = {'data': response}
-
-        # if the user does not have a watchlist, add this object to a new list and update the watchlist with this info.
-        else:
-            datalist = [media]
-            user.profile.watchlist.update({'data': datalist})
-
-        # if the logic makes it to the save step then the user was logged in and the object did not already exist in
-        # their watchlist. Save, reload page with success message.
-        user.save()
-        messages.success(request, "Watchlist updated.")
-        return render(request, "movies/media_detail.html", {'data':instance})
-
-    # if there is no logged in user, present an error message and send to login page
-    else:
-        messages.error(request, "You must login to save to a watchlist.")
-        return render(request, 'members/login.html')
 
 # try and find the movie object in the database using the id number as key. If object already exists simply return
 # the object without making any API calls. If object does not exist, create and fill fields
