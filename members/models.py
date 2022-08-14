@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.core.exceptions import ObjectDoesNotExist
 
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     watchlist = models.JSONField(default = dict)

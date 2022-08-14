@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 
-    def username_clean(self):
+    def clean_username(self):
         username = self.cleaned_data['username'].lower()
         new = User.objects.filter(username=username)
         if new.count():
