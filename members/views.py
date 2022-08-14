@@ -4,7 +4,6 @@ from django.contrib import messages
 from movies.views import lookup_obj
 from .forms import CustomUserCreationForm
 from django.forms.models import model_to_dict
-import pdb
 
 
 def about(request):
