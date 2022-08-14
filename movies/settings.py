@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d1xup8p$%ps%tn)h8jfx5b7#9uivq#4-+&=e1$+5scb@*s$ekq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [".herokuapp.com"]
+ALLOWED_HOSTS = [".herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -126,7 +126,7 @@ if DEBUG:
     ]
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATIC_URL = 'movies/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'movies/static'),
 
