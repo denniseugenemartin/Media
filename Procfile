@@ -1,1 +1,1 @@
-web: gunicorn movies/index.html
+web: gunicorn movies
