@@ -251,7 +251,7 @@ input, select, textarea {
 		margin: 0 auto;
 		max-width: 100%;
 		width: 1400px;
-		padding-left: 2em;
+		padding-top: 2em;
 	}
 
 		@media screen and (max-width: 1680px) {
@@ -2523,7 +2523,7 @@ input, select, textarea {
         right: 0px;
         margin-bottom: 0px;
 		overflow: hidden;
-		padding: 2em 0 2em 0;
+		padding: 0;
 		background: #313A46;
 		color: #fff;
 	}
