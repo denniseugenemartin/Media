@@ -45,5 +45,5 @@ This software uses the following open source packages:
 
 > Dennis Martin
 >
-> [GitHub] (https://github.com/denniseugenemartin/) &nbsp;&middot;&nbsp; 
+> [GitHub](https://github.com/denniseugenemartin/) &nbsp;&middot;&nbsp; 
 
