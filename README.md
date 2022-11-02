@@ -43,6 +43,7 @@ This software uses the following open source packages:
 
 ---
 
-> Dennis Martin&nbsp;&middot;&nbsp;
+> Dennis Martin
+>
 > [GitHub] (https://github.com/denniseugenemartin/) &nbsp;&middot;&nbsp; 
 
