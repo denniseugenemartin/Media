@@ -5,7 +5,7 @@
 
 
 
-![screenshot](https://github.com/denniseugenemartin/AmazingStuffShop/blob/main/screenshot.png)
+![screenshot](https://github.com/denniseugenemartin/Media/blob/main/screenshot.png)
 
 ## Key Features
 
